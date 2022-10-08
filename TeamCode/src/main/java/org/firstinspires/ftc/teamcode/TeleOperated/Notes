@@ -1,0 +1,5 @@
+CONTROL HUB
+DCMOTOR PORT 0 - leftFront
+DCMOTOR PORT 1 - leftBack
+DCMOTOR PORT 2 - rightFront
+DCMOTOR PORT 3 - rightBack
