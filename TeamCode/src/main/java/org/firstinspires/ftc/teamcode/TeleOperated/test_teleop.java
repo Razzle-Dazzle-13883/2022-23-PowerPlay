@@ -3,14 +3,12 @@ package org.firstinspires.ftc.teamcode.TeleOperated;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="MAINTeleop")
-public class test extends OpMode {
+@TeleOp(name="Test_Teleop")
+public class test_teleop extends OpMode {
 
     //motors
     DcMotor leftFront = null;
@@ -58,15 +56,15 @@ public class test extends OpMode {
         double y = -gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r) / 2);
-            leftBack.setPower((x - y - r) /2);
-            rightFront.setPower((x - y + r) /2 );
-            rightBack.setPower((x + y - r)  /2);
-        } else {
             leftFront.setPower((x + y + r) / 3.7);
             leftBack.setPower((x - y + r) / 3.7);
             rightFront.setPower((x - y - r) / 3.7);
             rightBack.setPower((x + y - r) / 3.7);
+        } else {
+            leftFront.setPower((x + y + r) / 5);
+            leftBack.setPower((x - y + r) / 5);
+            rightFront.setPower((x - y - r) / 5);
+            rightBack.setPower((x + y - r) / 5);
         }
 
         //Fastmode and slowmode
