@@ -17,7 +17,7 @@ public class test_teleop extends OpMode {
     DcMotor leftBack = null;
     DcMotor rightBack = null;
     Servo leftClaw = null;
-    //Servo rightClaw = null;
+    Servo rightClaw = null;
 
 
 
@@ -32,6 +32,7 @@ public class test_teleop extends OpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
 
 
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -80,12 +81,25 @@ public class test_teleop extends OpMode {
         } else if (gamepad1.a == true) {
             turboMode = false;
         }
-        double servoPos = 0;
+        double servoPosLeft = 0;
+        double servoPosRight = 0;
+
         if (gamepad2.left_bumper == true) {
-            servoPos = servoPos + 5;
-            leftClaw.setPosition(servoPos);
+            servoPosLeft = servoPosLeft + 5;
+            leftClaw.setPosition(servoPosLeft);
+
+            servoPosRight = servoPosRight - 5;
+            rightClaw.setPosition(servoPosRight);
         }
 
+
+        if (gamepad2.right_bumper == true) {
+            servoPosLeft = servoPosLeft - 5;
+            leftClaw.setPosition(servoPosLeft);
+
+            servoPosRight = servoPosRight + 5;
+            rightClaw.setPosition(servoPosRight);
+        }
 
 
 
