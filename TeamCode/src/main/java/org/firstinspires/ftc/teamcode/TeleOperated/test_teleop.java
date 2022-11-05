@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name="Test_Teleop")
@@ -15,6 +16,8 @@ public class test_teleop extends OpMode {
     DcMotor rightFront = null;
     DcMotor leftBack = null;
     DcMotor rightBack = null;
+    Servo leftClaw = null;
+    //Servo rightClaw = null;
 
 
 
@@ -28,6 +31,8 @@ public class test_teleop extends OpMode {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+
 
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -37,10 +42,12 @@ public class test_teleop extends OpMode {
 
 
 
+
         leftFront.setPower(0);
         rightFront.setPower(0);
         rightBack.setPower(0);
         leftBack.setPower(0);
+
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -72,6 +79,11 @@ public class test_teleop extends OpMode {
             turboMode = true;
         } else if (gamepad1.a == true) {
             turboMode = false;
+        }
+        double servoPos = 0;
+        if (gamepad2.left_bumper == true) {
+            servoPos = servoPos + 5;
+            leftClaw.setPosition(servoPos);
         }
 
 
