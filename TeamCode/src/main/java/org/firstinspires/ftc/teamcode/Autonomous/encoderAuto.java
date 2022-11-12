@@ -15,10 +15,24 @@ public class encoderAuto extends LinearOpMode {
     private DcMotor leftFront;
     private DcMotor leftBack;
 
-    double rightFrontPos;
-    double rightBackPos;
-    double leftFrontPos;
-    double leftBackPos;
+    double rightFrontPos =0
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ;
+    double rightBackPos = 0;
+    double leftFrontPos = 0;
+    double leftBackPos = 0;
 
 
     @Override
@@ -31,7 +45,12 @@ public class encoderAuto extends LinearOpMode {
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
 
 
         waitForStart();
