@@ -53,7 +53,7 @@ public class test_teleop extends OpMode {
         leftBack.setPower(0);
 
         leftClaw.setPosition(0.5);
-        rightClaw.setPosition(0.5);
+        rightClaw.setPosition(0.85);
 
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -90,15 +90,16 @@ public class test_teleop extends OpMode {
 
 
         if (gamepad2.left_bumper == true) {
-            leftClaw.setPosition(0.25);
-            rightClaw.setPosition(0.5);
+            leftClaw.setPosition(0.5);
+             rightClaw.setPosition(0.85);
+
 
         }
 
 
         if (gamepad2.right_bumper == true) {
-            leftClaw.setPosition(0.8);
-            rightClaw.setPosition(0.25);
+            leftClaw.setPosition(0.85);
+            rightClaw.setPosition(0.85 - .35);
         }
 
 

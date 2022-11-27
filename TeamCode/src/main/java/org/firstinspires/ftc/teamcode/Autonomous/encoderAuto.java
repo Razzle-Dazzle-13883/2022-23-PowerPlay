@@ -10,29 +10,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @Autonomous(name = "encoderAuto")
 
 public class encoderAuto extends LinearOpMode {
-    private DcMotor rightFront;
+    private DcMotor rightFront = null;
     private DcMotor rightBack;
     private DcMotor leftFront;
     private DcMotor leftBack;
 
-    double rightFrontPos =0
 
-
-
-
-
-
-
-
-
-
-
-
-
-            ;
-    double rightBackPos = 0;
-    double leftFrontPos = 0;
-    double leftBackPos = 0;
 
 
     @Override
@@ -54,6 +37,12 @@ public class encoderAuto extends LinearOpMode {
 
 
         waitForStart();
+
+
+        leftFront.setTargetPosition(60);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
 
 
 
