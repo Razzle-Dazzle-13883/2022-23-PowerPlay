@@ -53,7 +53,8 @@ public class encoderAuto extends LinearOpMode {
 
 
         // function move(distance)
-        leftFront.setTargetPosition(var);
+        int distance = 60;
+        leftFront.setTargetPosition(distance);
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftFront.setPower(.5);
 
@@ -72,29 +73,105 @@ public class encoderAuto extends LinearOpMode {
 
 
 
-        forward(30,.5);
 
 
 
-
-
-
+        forward(60,.5);
+        forward(-60,.5); //moving backward
+        left(60,.5);
+        right(60,.5);
 
     }
 
-    private void forward(int target, double speed  ) {
+    private void forward(int distance, double speed  ) {
+        leftFrontPos = leftFrontPos + distance;
+        rightFrontPos = rightFrontPos + distance;
+        leftBackPos = leftBackPos + distance;
+        rightBackPos = rightBackPos + distance;
 
-        
-        rightBackPos += target;
 
-        leftFront.setTargetPosition(var);
+        leftFront.setTargetPosition(leftFrontPos);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFront.setPower(speed);
 
+        rightFront.setTargetPosition(rightFrontPos);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setPower(speed);
+
+        leftBack.setTargetPosition(leftBackPos);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setPower(speed);
 
         rightBack.setTargetPosition(rightBackPos);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightBack.setPower(.5);
+        rightBack.setPower(speed);
+
+
+        while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
+            idle();
+        }
+
+
 
     }
 
 
+    private void left(int distance, double speed  ) {
+        leftFrontPos = leftFrontPos - distance;
+        rightFrontPos = rightFrontPos + distance;
+        leftBackPos = leftBackPos + distance;
+        rightBackPos = rightBackPos - distance;
+
+
+        leftFront.setTargetPosition(leftFrontPos);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFront.setPower(speed);
+
+        rightFront.setTargetPosition(rightFrontPos);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setPower(speed);
+
+        leftBack.setTargetPosition(leftBackPos);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setPower(speed);
+
+        rightBack.setTargetPosition(rightBackPos);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setPower(speed);
+
+
+        while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
+            idle();
+        }
+    }
+
+
+    private void right(int distance, double speed  ) {
+        leftFrontPos = leftFrontPos + distance;
+        rightFrontPos = rightFrontPos - distance;
+        leftBackPos = leftBackPos - distance;
+        rightBackPos = rightBackPos + distance;
+
+
+        leftFront.setTargetPosition(leftFrontPos);
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFront.setPower(speed);
+
+        rightFront.setTargetPosition(rightFrontPos);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setPower(speed);
+
+        leftBack.setTargetPosition(leftBackPos);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setPower(speed);
+
+        rightBack.setTargetPosition(rightBackPos);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setPower(speed);
+
+
+        while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
+            idle();
+        }
+    }
 }
