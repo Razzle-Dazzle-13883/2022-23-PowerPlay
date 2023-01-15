@@ -100,7 +100,9 @@ public class test_teleop extends OpMode {
         if (gamepad2.right_bumper == true) {
             leftClaw.setPosition(0.85);
             rightClaw.setPosition(0.85 - .40);
-        }
+            leftClaw.setPosition(0.8);
+            rightClaw.setPosition(0.5);
+            }
 
 
         if (gamepad2.left_stick_y >= 0.3 || gamepad2.left_stick_y <= -0.3) {
