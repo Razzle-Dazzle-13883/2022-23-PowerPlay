@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous;
+package org.firstinspires.ftc.teamcode.Autonomous.UsedFiles;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -46,36 +46,6 @@ public class encoderAuto extends LinearOpMode {
 
 
 
-
-
-
-
-
-
-        // function move(distance)
-        int distance = 60;
-        leftFront.setTargetPosition(distance);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setPower(.5);
-
-        rightFront.setTargetPosition(distance);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setPower(.5);
-
-        leftBack.setTargetPosition(distance);
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftBack.setPower(.5);
-
-        rightBack.setTargetPosition(distance);
-        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightBack.setPower(.5);
-
-
-
-
-
-
-
         forward(60,.5);
         forward(-60,.5); //moving backward
         left(60,.5);
@@ -91,19 +61,19 @@ public class encoderAuto extends LinearOpMode {
 
 
         leftFront.setTargetPosition(leftFrontPos);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setPower(speed);
-
         rightFront.setTargetPosition(rightFrontPos);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setPower(speed);
-
         leftBack.setTargetPosition(leftBackPos);
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftBack.setPower(speed);
-
         rightBack.setTargetPosition(rightBackPos);
+
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(speed);
+        rightFront.setPower(speed);
+        leftBack.setPower(speed);
         rightBack.setPower(speed);
 
 
@@ -124,21 +94,20 @@ public class encoderAuto extends LinearOpMode {
 
 
         leftFront.setTargetPosition(leftFrontPos);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setPower(speed);
-
         rightFront.setTargetPosition(rightFrontPos);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setPower(speed);
-
         leftBack.setTargetPosition(leftBackPos);
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftBack.setPower(speed);
-
         rightBack.setTargetPosition(rightBackPos);
-        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightBack.setPower(speed);
 
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(speed);
+        rightFront.setPower(speed);
+        leftBack.setPower(speed);
+        rightBack.setPower(speed);
 
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
@@ -152,23 +121,49 @@ public class encoderAuto extends LinearOpMode {
         leftBackPos = leftBackPos - distance;
         rightBackPos = rightBackPos + distance;
 
-
         leftFront.setTargetPosition(leftFrontPos);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setPower(speed);
-
         rightFront.setTargetPosition(rightFrontPos);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setPower(speed);
-
         leftBack.setTargetPosition(leftBackPos);
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftBack.setPower(speed);
-
         rightBack.setTargetPosition(rightBackPos);
+
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(speed);
+        rightFront.setPower(speed);
+        leftBack.setPower(speed);
         rightBack.setPower(speed);
 
+
+        while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
+            idle();
+        }
+    }
+
+
+    private void custom(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
+        leftFrontPos += leftFrontTarget;
+        rightFrontPos += rightFrontTarget;
+        leftBackPos += leftBackTarget;
+        rightBackPos += rightBackTarget;
+
+        leftFront.setTargetPosition(leftFrontPos);
+        rightFront.setTargetPosition(rightFrontPos);
+        leftBack.setTargetPosition(leftBackPos);
+        rightBack.setTargetPosition(rightBackPos);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(speed);
+        rightFront.setPower(speed);
+        leftBack.setPower(speed);
+        rightBack.setPower(speed);
 
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
