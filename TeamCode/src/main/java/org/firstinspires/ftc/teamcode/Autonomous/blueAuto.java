@@ -68,7 +68,7 @@ public class blueAuto extends LinearOpMode {
 
         drive(-38 * 20, 38 * 20, 38 * 20, -38 * 20, .25);
 
-        drive(38 * 22, 38 * 22, 38 * 22, 38 * 22, .25);
+/*        drive(38 * 22, 38 * 22, 38 * 22, 38 * 22, .25);
 
         sleep(1000);
         // moves right towards the small junction and goes forwards
@@ -100,10 +100,10 @@ public class blueAuto extends LinearOpMode {
 
         sleep(1000);
 
-        // rotates to point towards substation
+        // rotates to point towards substation*/
     }
 
-    private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
+    private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed) {
         leftFrontPos += leftFrontTarget;
         rightFrontPos += rightFrontTarget;
         leftBackPos += leftBackTarget;

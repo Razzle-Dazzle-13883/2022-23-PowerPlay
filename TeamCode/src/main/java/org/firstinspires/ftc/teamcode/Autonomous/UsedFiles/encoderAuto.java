@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 @Autonomous(name = "encoderAuto")
@@ -13,11 +14,17 @@ public class encoderAuto extends LinearOpMode {
     private DcMotor rightBack;
     private DcMotor leftFront;
     private DcMotor leftBack;
+    Servo leftClaw = null;
+    Servo rightClaw = null;
+    DcMotor linearSlide = null;
+
 
     int leftFrontPos = 0;
     int rightFrontPos = 0;
     int leftBackPos = 0;
     int rightBackPos = 0;
+    int linearSlidePos = 0;
+
 
 
 
@@ -27,6 +34,11 @@ public class encoderAuto extends LinearOpMode {
         rightBack = hardwareMap.dcMotor.get("rightBack");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftBack = hardwareMap.dcMotor.get("leftBack");
+        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
+        linearSlide = hardwareMap.dcMotor.get("linearSlides");
+
+
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -35,8 +47,10 @@ public class encoderAuto extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-
+        leftClaw.setPosition(1);
+        rightClaw.setPosition(0);
 
 
         waitForStart();
@@ -45,14 +59,37 @@ public class encoderAuto extends LinearOpMode {
 
 
 
+        up(70*10, 1);
 
-        forward(60,.5);
-        forward(-60,.5); //moving backward
-        left(60,.5);
-        right(60,.5);
+        forward(-120*10,.5);
+
+        right(90*10, 0.2);
+
+        up(150*10, 1);
+
+        forward(20 * 10, 0.5);
+
+        leftClaw.setPosition(0.5);
+        rightClaw.setPosition(0.85);
+
 
     }
 
+
+
+    private void up (int up, double speed) {
+        linearSlidePos += up;
+
+        linearSlide.setTargetPosition(linearSlidePos);
+
+        linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        linearSlide.setPower(speed);
+
+        while (opModeIsActive() && linearSlide.isBusy()) {
+            idle();
+        }
+    }
     private void forward(int distance, double speed  ) {
         leftFrontPos = leftFrontPos + distance;
         rightFrontPos = rightFrontPos + distance;
@@ -86,7 +123,7 @@ public class encoderAuto extends LinearOpMode {
     }
 
 
-    private void left(int distance, double speed  ) {
+    private void right(int distance, double speed  ) {
         leftFrontPos = leftFrontPos - distance;
         rightFrontPos = rightFrontPos + distance;
         leftBackPos = leftBackPos + distance;
@@ -115,7 +152,7 @@ public class encoderAuto extends LinearOpMode {
     }
 
 
-    private void right(int distance, double speed  ) {
+    private void left(int distance, double speed  ) {
         leftFrontPos = leftFrontPos + distance;
         rightFrontPos = rightFrontPos - distance;
         leftBackPos = leftBackPos - distance;
