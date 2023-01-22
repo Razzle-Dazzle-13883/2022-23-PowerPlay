@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@Autonomous(name = "encoderAuto")
+@Autonomous(name = "use this for red 1/21/2023")
 
-public class encoderAuto extends LinearOpMode {
+public class redEncoderComp extends LinearOpMode {
     private DcMotor rightFront = null;
     private DcMotor rightBack;
     private DcMotor leftFront;
@@ -70,7 +70,7 @@ public class encoderAuto extends LinearOpMode {
 
         up(2500, .3); //raise cone
 
-        right(750, 0.2);
+        right(-800, 0.2);
         sleep(1500);
 
         leftClaw.setPosition(0.5);// open claw
@@ -79,7 +79,7 @@ public class encoderAuto extends LinearOpMode {
 
 
 
-        right(850, 0.2);
+        right(-850, 0.2);
 
         leftClaw.setPosition(1); // close claw
         rightClaw.setPosition(0);
