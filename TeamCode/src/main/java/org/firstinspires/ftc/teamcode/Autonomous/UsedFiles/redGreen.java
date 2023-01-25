@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@Autonomous(name = "encoderAuto")
+@Autonomous(name = "rightGreen")
 
-public class encoderAuto extends LinearOpMode {
+public class redGreen extends LinearOpMode {
     private DcMotor rightFront = null;
     private DcMotor rightBack;
     private DcMotor leftFront;
@@ -59,34 +59,29 @@ public class encoderAuto extends LinearOpMode {
 
 
 
-        up(70*10, 1);
+        up(700, 1);
 
-        forward(-400,.3);
-        forward(-400,.2);
-        forward(-400,.1);
+        forward(-1000, 0.2);
+        sleep(20);
 
+        right(2000, 0.2);
+        sleep(20);
 
-        sleep(2000);
+        forward(300, 0.05);
+        sleep(10);
 
-        up(2500, .3); //raise cone
+        up(300, 0.25);
 
-        right(750, 0.2);
-        sleep(1500);
+        forward(100, 0.1);
 
-        leftClaw.setPosition(0.5);// open claw
+        leftClaw.setPosition(0.5);
         rightClaw.setPosition(0.85);
-        sleep(1500);
 
+        forward(-300, 0.05);
 
+        right(200, 0.1);
 
-        right(850, 0.2);
-
-        leftClaw.setPosition(1); // close claw
-        rightClaw.setPosition(0);
-        up(-1500, .25); //
-
-
-
+        forward(2200, 0.2);
 
     }
 
@@ -106,10 +101,10 @@ public class encoderAuto extends LinearOpMode {
         }
     }
     private void forward(int distance, double speed  ) {
-        leftFrontPos = leftFrontPos + distance;
-        rightFrontPos = rightFrontPos + distance;
-        leftBackPos = leftBackPos + distance;
-        rightBackPos = rightBackPos + distance;
+        leftFrontPos = leftFrontPos - distance;
+        rightFrontPos = rightFrontPos - distance;
+        leftBackPos = leftBackPos - distance;
+        rightBackPos = rightBackPos - distance;
 
 
         leftFront.setTargetPosition(leftFrontPos);
@@ -139,10 +134,10 @@ public class encoderAuto extends LinearOpMode {
 
 
     private void right(int distance, double speed  ) {
-        leftFrontPos = leftFrontPos + distance;
-        rightFrontPos = rightFrontPos - distance;
-        leftBackPos = leftBackPos - distance;
-        rightBackPos = rightBackPos + distance;
+        leftFrontPos = leftFrontPos - distance;
+        rightFrontPos = rightFrontPos + distance;
+        leftBackPos = leftBackPos + distance;
+        rightBackPos = rightBackPos - distance;
 
 
         leftFront.setTargetPosition(leftFrontPos);
@@ -168,10 +163,10 @@ public class encoderAuto extends LinearOpMode {
 
 
     private void left(int distance, double speed  ) {
-        leftFrontPos = leftFrontPos + distance;
-        rightFrontPos = rightFrontPos - distance;
-        leftBackPos = leftBackPos - distance;
-        rightBackPos = rightBackPos + distance;
+        leftFrontPos = leftFrontPos - distance;
+        rightFrontPos = rightFrontPos + distance;
+        leftBackPos = leftBackPos + distance;
+        rightBackPos = rightBackPos - distance;
 
         leftFront.setTargetPosition(leftFrontPos);
         rightFront.setTargetPosition(rightFrontPos);
@@ -197,10 +192,10 @@ public class encoderAuto extends LinearOpMode {
 
 
     private void custom(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
-        leftFrontPos += leftFrontTarget;
-        rightFrontPos += rightFrontTarget;
-        leftBackPos += leftBackTarget;
-        rightBackPos += rightBackTarget;
+        leftFrontPos -= leftFrontTarget;
+        rightFrontPos -= rightFrontTarget;
+        leftBackPos -= leftBackTarget;
+        rightBackPos -= rightBackTarget;
 
         leftFront.setTargetPosition(leftFrontPos);
         rightFront.setTargetPosition(rightFrontPos);
