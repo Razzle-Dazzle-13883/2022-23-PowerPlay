@@ -16,8 +16,8 @@ public class redGreen extends LinearOpMode {
     private DcMotor leftBack;
     Servo leftClaw = null;
     Servo rightClaw = null;
-    DcMotor linearSlide = null;
-
+    DcMotor linearSlideLeft = null;
+    DcMotor linearSlideRight = null;
 
     int leftFrontPos = 0;
     int rightFrontPos = 0;
@@ -36,18 +36,20 @@ public class redGreen extends LinearOpMode {
         leftBack = hardwareMap.dcMotor.get("leftBack");
         leftClaw = hardwareMap.get(Servo.class, "leftClaw");
         rightClaw = hardwareMap.get(Servo.class, "rightClaw");
-        linearSlide = hardwareMap.dcMotor.get("linearSlides");
-
+        linearSlideLeft = hardwareMap.dcMotor.get("linearSlideLeft");
+        linearSlideRight = hardwareMap.dcMotor.get("linearSlideRight");
 
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        linearSlideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftClaw.setPosition(1);
         rightClaw.setPosition(0);
@@ -90,13 +92,15 @@ public class redGreen extends LinearOpMode {
     private void up (int up, double speed) {
         linearSlidePos += up;
 
-        linearSlide.setTargetPosition(linearSlidePos);
+        linearSlideLeft.setTargetPosition(linearSlidePos);
+        linearSlideRight.setTargetPosition((linearSlidePos));
 
-        linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearSlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearSlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearSlideLeft.setPower(speed);
+        linearSlideRight.setPower(speed);
 
-        linearSlide.setPower(speed);
-
-        while (opModeIsActive() && linearSlide.isBusy()) {
+        while (opModeIsActive() && linearSlideLeft.isBusy() && linearSlideRight.isBusy()) {
             idle();
         }
     }
