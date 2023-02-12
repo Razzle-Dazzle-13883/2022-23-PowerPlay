@@ -61,7 +61,7 @@ public class redGreen extends LinearOpMode {
 
 
 
-        up(700, 1);
+//        up(700, 1);
 
         forward(-1000, 0.2);
         sleep(20);
@@ -72,7 +72,7 @@ public class redGreen extends LinearOpMode {
         forward(300, 0.05);
         sleep(10);
 
-        up(300, 0.25);
+//        up(300, 0.25);
 
         forward(100, 0.1);
 

@@ -12,14 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class RM_telemetry extends OpMode {
 
     //motors
-    DcMotor leftFront = null;
-    DcMotor rightFront = null;
-    DcMotor leftBack = null;
-    DcMotor rightBack = null;
-    Servo leftClaw = null;
-    Servo rightClaw = null;
-    DcMotor linearSlide = null;
-
+    DcMotor linearSlideLeft = null;
+    DcMotor linearSlideRight = null;
 
     boolean armHold = false;
 
@@ -30,43 +24,23 @@ public class RM_telemetry extends OpMode {
     @Override
     public void init() {
 
-        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
-        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
-        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
-        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
-        linearSlide = hardwareMap.get(DcMotor.class, "linearSlides");
+        linearSlideLeft = hardwareMap.get(DcMotor.class, "linearSlideLeft");
+        linearSlideRight = hardwareMap.get(DcMotor.class, "linearSlideRight");
 
 
-        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-        leftFront.setPower(0);
-        rightFront.setPower(0);
-        rightBack.setPower(0);
-        leftBack.setPower(0);
-        linearSlide.setPower(0);
+        linearSlideLeft.setPower(0);
+        linearSlideRight.setPower(0);
 
 
-        leftClaw.setPosition(0.5);
-        rightClaw.setPosition(0.85);
-
-
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        linearSlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
@@ -79,44 +53,16 @@ public class RM_telemetry extends OpMode {
 
 
 
-        if (gamepad2.left_bumper == true) {
-            leftClaw.setPosition(0.3);
-             rightClaw.setPosition(0.85);
-
-
-        }
-
-
-        if (gamepad2.right_bumper == true) {
-            leftClaw.setPosition(0.3 + .55);
-            rightClaw.setPosition(0.85 - .55);
-
-        }
-
-
         if (gamepad2.left_stick_y >= 0.3 || gamepad2.left_stick_y <= -0.3) {
-            linearSlide.setPower(gamepad2.left_stick_y);
+            linearSlideLeft.setPower(gamepad2.left_stick_y/3);
+            linearSlideRight.setPower(gamepad2.left_stick_y/3);
         }
         else {
             if (armHold == false) {
-                linearSlide.setPower(0);
+                linearSlideLeft.setPower(0);
+                linearSlideRight.setPower(0);
             }
         }
-        telemetry.update();
-        telemetry.addData("Arm Encoder Value",linearSlide.getCurrentPosition());
-        if (gamepad2.dpad_up) {
-            armHold = true;
-            int armPos = linearSlide.getCurrentPosition();
-            linearSlide.setTargetPosition(armPos);
-            linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            linearSlide.setPower(.3);
-        }
-        if (gamepad2.dpad_down) {
-            armHold = false;
-            linearSlide.setPower(0);
-        }
-
-
 
     }
 }
