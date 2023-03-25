@@ -77,15 +77,15 @@ public class test_teleop extends OpMode {
         double y = gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r) / 3);
-            leftBack.setPower((x - y + r) / 3);
-            rightFront.setPower((x - y - r) / 3);
-            rightBack.setPower((x + y - r) / 3);
+            leftFront.setPower((x + y + r));
+            leftBack.setPower((x - y + r));
+            rightFront.setPower((x - y - r));
+            rightBack.setPower((x + y - r));
         } else {
-            leftFront.setPower((x + y + r) / 5);
-            leftBack.setPower((x - y + r) / 5);
-            rightFront.setPower((x - y - r) / 5);
-            rightBack.setPower((x + y - r) / 5);
+            leftFront.setPower((x + y + r) / 2);
+            leftBack.setPower((x - y + r) / 2           );
+            rightFront.setPower((x - y - r) / 2);
+            rightBack.setPower((x + y - r) / 2);
         }
 
         if (gamepad1.y) {
@@ -95,7 +95,7 @@ public class test_teleop extends OpMode {
             turboMode = false;
         }
 
-        if (gamepad2.right_bumper == true) {
+        if (gamepad1.right_bumper == true) {
             leftClaw.setPosition(1);
             rightClaw.setPosition(0);
 
@@ -103,7 +103,7 @@ public class test_teleop extends OpMode {
         }
 
 
-        if (gamepad2.left_bumper == true) {
+        if (gamepad1.left_bumper == true) {
             leftClaw.setPosition(0.5);
             rightClaw.setPosition(0.5);
 
