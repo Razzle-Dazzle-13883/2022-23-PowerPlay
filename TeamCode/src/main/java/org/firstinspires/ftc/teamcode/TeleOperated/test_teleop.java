@@ -18,7 +18,7 @@ public class test_teleop extends OpMode {
     DcMotor rightBack = null;
     Servo leftClaw = null;
     Servo rightClaw = null;
-//    DcMotor linearSlide = null;
+    DcMotor linearSlide = null;
 
 
 
@@ -73,14 +73,14 @@ public class test_teleop extends OpMode {
 
 
         //strafing stuff + Turbomode stuff
-        double x = -gamepad1.left_stick_y;
-        double y = gamepad1.left_stick_x;
+        double forward = -gamepad1.left_stick_y;
+        double strafe = gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r));
-            leftBack.setPower((x - y + r));
-            rightFront.setPower((x - y - r));
-            rightBack.setPower((x + y - r));
+            leftFront.setPower((forward + strafe + r));
+            leftBack.setPower((forward - strafe + r));
+            rightFront.setPower((forward - strafe - r));
+            rightBack.setPower((forward + strafe - r));
         } else {
             leftFront.setPower((x + y + r) / 2);
             leftBack.setPower((x - y + r) / 2           );
